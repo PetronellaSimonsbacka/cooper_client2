@@ -65,10 +65,11 @@ angular.module('starter.controllers', [])
   $scope.calculateCooper = function() {
     var person = new Person({
       gender: $scope.data.gender,
-      age: $scope.data.age
+      age: $scope.data.age,
+      distance: $scope.data.distance,
     });
 
-    person.assessCooper($scope.data.distance);
+    person.assessCooper($scope.data);
     $scope.person = person;
     console.log($scope.person)
     };
