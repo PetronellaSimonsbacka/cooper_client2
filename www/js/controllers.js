@@ -39,6 +39,7 @@ angular.module('starter.controllers', [])
     max: 3500,
     value: 1000
   };
+  
   $scope.data = {};
   $scope.calculateCooper = function() {
     var person = new Person({

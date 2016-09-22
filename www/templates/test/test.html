@@ -9,11 +9,11 @@
               <div class="input-label">
                 Gender
               </div>
-              <select
-              ng-model="data.gender"
-              ng-options="option as option for option in gender"
-              required></select>
-            </label>
+    <select
+      ng-model="data.gender"
+      ng-options="option as option for option in gender"
+      required></select>
+       </label>
 
             <div class="item item-divider">Age
               <output name="agevalue" for="age"></output>
@@ -50,14 +50,16 @@
             ng-click="calculateCooper()"
             ng-disabled="testdata.$invalid">Get results</button>
           </form>
-        <div class="card" ng-if="person">
-          <div class="item item-divider">
-            Cooper Test results
-          </div>
-          <div class="item item-text-wrap">
-            <p>Person: Age {{person.age}}, Gender {{person.gender}}</p>
-            <p>Result: {{person.cooperMessage}}</p>
-          </div>
+          <div class="card" ng-if="person">
+              <div class="item item-divider">
+                Cooper Test results
+              </div>
+              <div class="item item-text-wrap">
+                <p>Person: Distance {{person.distance}}, Age {{person.age}}</p>
+                <p>Cooper: {{person.cooperValue}}</p>
+                <p><strong>You are {{person.cooperMessage}}</strong></p>
+              </div>
+            </div>
 
 
         </div>
