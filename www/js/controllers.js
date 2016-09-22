@@ -1,6 +1,11 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $auth) {
+.controller('AppCtrl', function ($rootScope,
+                                 $scope,
+                                 $ionicModal,
+                                 $timeout,
+                                 $auth,
+                                 $ionicLoading) {
 
   $scope.loginData = {};
 
@@ -19,23 +24,28 @@ angular.module('starter.controllers', [])
     $scope.modal.show();
   };
 
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
+  $scope.doLogin = function () {
+    $ionicLoading.show({
+      template: 'Logging in...'
+    });
     $auth.submitLogin($scope.loginData)
       .then(function (resp) {
-            // handle success response
-            $scope.closeLogin();
+        $rootScope.$on('auth:login-success', function(ev, user) {
+          $scope.currentUser = user;
+        });
+        $ionicLoading.hide();
+        $scope.closeLogin();
       })
       .catch(function (error) {
-            // handle error response
-      $scope.errorMessage = error;
+        $ionicLoading.hide();
+        $scope.errorMessage = error;
       });
+    };
 
     $timeout(function() {
       $scope.closeLogin();
     }, 1000);
-  };
-})
+  })
 
 .controller('TestController', function($scope) {
   $scope.gender = ['Male', 'Female']
