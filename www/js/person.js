@@ -7,5 +7,9 @@ function Person(attr) {
 
 Person.prototype.assessCooper = function(data) {
   calculator = new CooperCalculator();
-  calculator.woman_cooper(this);
+  if (data.gender == 'Male') {
+    calculator.man_cooper(this);
+  } else {
+    calculator.woman_cooper(this);
+  }
 };
