@@ -64,7 +64,16 @@ angular.module('starter.controllers', [])
     };
 
     $scope.retrieveData = function(){
-    //Still not implemented...
+      $ionicLoading.show({
+        template: 'Retrieving data...'
+      });
+      performaceData.query({}, function(response){
+        $state.go('app.data', {savedDataCollection: response.entries});
+        $ionicLoading.hide();
+      }, function(error){
+        $ionicLoading.hide();
+        $scope.showAlert('Failure', error.statusText);
+      })
     };
 
     $scope.showAlert = function(message, content) {
@@ -76,6 +85,12 @@ angular.module('starter.controllers', [])
       // Place some action here if needed...
       });
     };
+  })
+
+  .controller('DataCtrl', function($scope, $stateParams){
+    $scope.$on('$ionicView.enter', function () {
+      $scope.savedDataCollection = $stateParams.savedDataCollection;
+    });
   })
 
 .controller('TestController', function($scope) {
