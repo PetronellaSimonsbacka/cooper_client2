@@ -56,6 +56,15 @@ angular.module('starter.controllers', [])
   };
 })
 
+  $scope.saveData = function(person){
+    data = {performace_data: {data: {message: person.cooperMessage}}}
+    performaceData.save(data, function(response){
+      console.log(response);
+    }, function(error){
+      console.log(error);
+    })
+  }
+
 .controller('TestController', function($scope) {
   $scope.gender = ['Male', 'Female']
   $scope.ageValues = {
