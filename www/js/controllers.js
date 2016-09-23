@@ -30,8 +30,8 @@ angular.module('starter.controllers', [])
     });
     $auth.submitLogin($scope.loginData)
       .then(function (resp) {
-        $rootScope.$on('auth:login-success', function(ev, user) {
-          $scope.currentUser = user;
+        $rootScope.$on('auth:login-success', function (ev, user) {
+          $scope.currentUser = angular.extend(user, $auth.retrieveData('auth_headers'));
         });
         $ionicLoading.hide();
         $scope.closeLogin();
@@ -47,23 +47,36 @@ angular.module('starter.controllers', [])
     }, 1000);
   })
 
-  .controller('PerformanceCtrl', function($scope, performaceData){
-  $scope.saveData = function(){
+  .controller('PerformanceCtrl', function($scope, performaceData, $ionicLoading, $ionicPopup){
 
-  };
-  $scope.retrieveData = function(){
+    $scope.saveData = function(person){
+      var data = {performance_data: {data: {message: person.cooperMessage}}};
+      $ionicLoading.show({
+        template: 'Saving...'
+      });
+      performaceData.save(data, function(response){
+        $ionicLoading.hide();
+        $scope.showAlert('Sucess', response.message);
+      }, function(error){
+        $ionicLoading.hide();
+        $scope.showAlert('Failure', error.statusText);
+      })
+    };
 
-  };
-})
+    $scope.retrieveData = function(){
+    //Still not implemented...
+    };
 
-  $scope.saveData = function(person){
-    data = {performace_data: {data: {message: person.cooperMessage}}}
-    performaceData.save(data, function(response){
-      console.log(response);
-    }, function(error){
-      console.log(error);
-    })
-  }
+    $scope.showAlert = function(message, content) {
+      var alertPopup = $ionicPopup.alert({
+        title: message,
+        template: content
+      });
+      alertPopup.then(function(res) {
+      // Place some action here if needed...
+      });
+    };
+  })
 
 .controller('TestController', function($scope) {
   $scope.gender = ['Male', 'Female']
