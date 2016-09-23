@@ -6,7 +6,9 @@
   },
   "dependencies": {
     "ng-token-auth": "^0.0.29",
-    "angular-resource": "^1.5.8"
+    "angular-resource": "^1.5.8",
+    "chart.js": "2.3.0-rc.1",
+    "angular-chart.js": "^1.0.2"
   },
   "resolutions": {
     "angular": "1.5.8"
