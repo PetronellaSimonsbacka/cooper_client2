@@ -61,13 +61,7 @@
                 <p><strong>You are {{person.cooperMessage}}</strong></p>
               </div>
             </div>
-            <ion-view title="Historical Data">
-              <ion-content>
-                <div ng-if="savedDataCollection" ng-repeat="entry in savedDataCollection ">
-                  <p ng-if="entry.data.message">{{entry.data.message}} - {{entry.created_at | date:'mediumDate'}}</p>
-                </div>
-              </ion-content>
-            </ion-view>
+
             <button
               ng-if="currentUser"
               ng-controller="PerformanceCtrl"
